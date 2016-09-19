@@ -1,0 +1,16 @@
+{
+  "name": "simple-md-server",
+  "version": "1.0.0",
+  "description": "一个简单的显示md文件的服务器",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor server.js"
+  },
+  "author": "kuangcaibao",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "marked": "^0.3.6"
+  }
+}
