@@ -10,7 +10,9 @@
   "author": "kuangcaibao",
   "license": "MIT",
   "dependencies": {
+    "ejs-mate": "^2.3.0",
     "express": "^4.14.0",
+    "lodash": "^4.15.0",
     "marked": "^0.3.6"
   }
 }

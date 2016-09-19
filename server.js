@@ -2,6 +2,11 @@ var express = require("express");
 var marked = require("marked");
 var fs = require("fs");
 var path = require("path");
+var _ = require("lodash");
+var ejsMate = require("ejs-mate");
+
+// 路由
+var router = require("./route");
 
 var app = new express();
 var config = require("./config");
@@ -18,10 +23,23 @@ marked.setOptions(Object.assign({
 }, config.marked));
 
 app.use("/imgs", express.static("doc/imgs"));
+app.use("/public", express.static("public"));
+
+// 模板引擎
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "html");
+app.engine("html", ejsMate);
+app.locals._layoutFile = "layout.html";
+_.extend(app.locals, {
+  config: config,
+  // Loader: Loader
+});
+
+app.use("/", router);
 
 app.get("*", function(req, res) {
 
-  res.send(marked(fs.readFileSync(path.resolve("./doc/mobile_bs_alert_1.md"), { encoding: "utf-8"})));
+  res.redirect("/");
 })
 
 app.listen(config.listen_port, function() {

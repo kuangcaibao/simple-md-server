@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% if(typeof title !== "undefined") { %>
+  <title><%= title %></title>
+  <% } %>
+  <meta charset="utf-8" />
+  <meta name="description" content="<%= config.description %>" />
+  <meta name="viewport" content="width-device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/public/bootstrap.min.css" />
+  <script src="/public/jquery-1.11.2.min.js"></script>
+  <script src="/public/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<%- partial("./nav") %>
+
+<%- body %>
+
+</body>
+</html>
