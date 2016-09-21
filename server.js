@@ -25,6 +25,10 @@ marked.setOptions(Object.assign({
 app.use("/imgs", express.static("doc/imgs"));
 app.use("/public", express.static("public"));
 
+app.get("/favicon.ico", function(req, res) {
+  res.send("");
+})
+
 // 模板引擎
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "html");

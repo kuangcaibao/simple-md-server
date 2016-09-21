@@ -1,22 +1,32 @@
-<div class="container" data-spy="scroll" data-target="#myScrollSpy">
+<div class="container" >
   
   <div class="row">
     
-    <div class="col-xs-3">
+    <div class="col-xs-3" id="myScrollSpy">
       <ul class="nav nav-tabs nav-stacked" data-spy="affix">
         
         <%
-          var reg = new RegExp(/<\bh3\b[ \w+=']*/g);
-          var h3Num = body.match(reg);
-          for(var i = 0; i < h3Num.length; i++) {
-            var h3Match = "";
+          for(var i = 0; i < h3Content.length; i++) {
+            var h3c = h3Content[i];
+            if(i == 0) {
         %>
-
+              <li><a class="active" href="#<%= h3c.id%>"><%= h3c.tt%></a>
         <%
+            } else {
+        %>
+              <li><a href="#<%= h3c.id%>"><%= h3c.tt%></a>
+        <%
+            }
           }
         %>
 
       </ul>
+    </div>
+
+    <div class="col-xs-9">
+      
+      <%- detail %>
+
     </div>
 
   </div>
