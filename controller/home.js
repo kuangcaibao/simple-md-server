@@ -16,6 +16,12 @@ exports.show = function(req, res, next) {
   var mdStr = fs.readFileSync(path.resolve(__dirname, "../doc/" + mdFileName + ".md"), { encoding: "utf-8" });
   var mdHtmlStr = marked(mdStr);
 
+  var count = 0;
+  while(mdHtmlStr.indexOf("\"-\"") >= 0) {
+    var rStr = "h3_" + (count++);
+    mdHtmlStr = mdHtmlStr.replace("\"-\"", "\""+rStr+"\"");
+  }
+
   var $ = cheerio.load(mdHtmlStr);
   var h3s = $("h3");
   var h3Content = [];
@@ -26,6 +32,6 @@ exports.show = function(req, res, next) {
 
   console.log(h3Content);
 
-  res.render("item", { h3Content: h3Content, detail: marked(mdStr) });
+  res.render("item", { h3Content: h3Content, detail: mdHtmlStr });
   
 }
