@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -10,6 +10,22 @@
       </button>
       <a class="navbar-brand" href="/">文档说明</a>
     </div>
+
+    <% if(typeof isLogin == "undefined" || !isLogin) { %>
+
+      <div class="navbar-collapse collapse">
+        
+        <ul class="nav navbar-nav navbar-right">
+          
+          <li>
+            <a href="/login">登录</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    <% } %>
 
   </div>
 </nav>
