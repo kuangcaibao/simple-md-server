@@ -24,8 +24,17 @@ exports.login = function(req, res) {
     req.session.isLogin = true;
     res.redirect("/");
   } else {
-    
+
     res.render("login", {msg: "用户名或者密码错误！"});
   }
 
+}
+
+// 判断是否登录
+exports.isLogin = function(req, res, next) {
+  if(req.session.isLogin) {
+    next();
+  } else {
+    res.redirect("/");
+  }
 }

@@ -1,0 +1,39 @@
+<div class="sidebar-module sidebar-module-inset">
+    
+  <h4>关于</h4>
+
+  <p>这个人很懒，什么都没有留下。</p>
+
+</div>
+
+<%
+  if(typeof isLogin != "undefined" && isLogin == true) {
+%>
+    <div class="sidebar-module">
+      
+      <a href="/blog/create" class="btn btn-success">创建Blog</a>
+
+    </div>
+<%
+  }
+%>
+
+<div class="sidebar-module">
+  
+  <h4>归档</h4>
+
+</div>
+
+<div class="sidebar-module">
+  
+  <h4>联系</h4>
+
+  <ol class="list-unstyled">
+    
+    <li>
+      <a href="http://github.com/kuangcaibao">Github</a>
+    </li>
+
+  </ol>
+
+</div>

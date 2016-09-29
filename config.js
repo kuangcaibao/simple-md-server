@@ -12,7 +12,7 @@ module.exports = {
   session: {
     secret: "hello world",
     cookie: {
-      maxAge: 60 * 1000
+      maxAge: 5 * 60 * 1000
     }
   }
 }
