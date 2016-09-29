@@ -2,12 +2,14 @@ var express = require("express");
 var router = express.Router();
 
 var home = require("./controller/home");
-var item = require("./controller/item");
+var user = require("./controller/user");
 
-router.get("/", home.show);
+router.get("/", user.showHome);
 
-router.get("/:md", home.show);
+router.get("/login", user.showLogin);
 
-router.get("/items/:item", item.show);
+router.post("/login", user.login);
+
+// router.get("/:md", home.show);
 
 module.exports = router;

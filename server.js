@@ -4,6 +4,9 @@ var fs = require("fs");
 var path = require("path");
 var _ = require("lodash");
 var ejsMate = require("ejs-mate");
+var session = require("express-session");
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 
 // 路由
 var router = require("./route");
@@ -38,6 +41,14 @@ _.extend(app.locals, {
   config: config,
   // Loader: Loader
 });
+
+app.use(session(config.session));
+app.use(function(req, res, next) {
+  res.locals = req.session;
+  next();
+});
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use("/", router);
 

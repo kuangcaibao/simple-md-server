@@ -3,8 +3,6 @@ var fs = require("fs");
 var path = require("path");
 var cheerio = require("cheerio");
 
-// var mdStr = fs.readFileSync(path.resolve("./doc/index.md"), { encoding: "utf-8"});
-
 exports.show = function(req, res, next) {
 
   var mdFileName = req.params.md;

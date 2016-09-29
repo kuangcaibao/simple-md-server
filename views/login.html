@@ -1,0 +1,28 @@
+<div class="container">
+  
+  <style type="text/css">
+    .form-signin {
+      width: 330px;
+      margin: auto;
+    }
+    input {
+      margin: 15px 0;
+    }
+  </style>
+  <form class="form-signin" role="form" method="post" path="/login">
+    
+    <% if(typeof msg != "undefined") { %>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <%= msg%>
+    </div>
+    <% } %>
+
+    <input type="text" class="form-control" placeholder="用户名" name="username" required autofocus>
+    <input type="password" class="form-control" placeholder="密码" name="password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+
+
+  </form>
+
+</div>
