@@ -11,7 +11,9 @@ router.get("/login", user.showLogin);
 
 router.post("/login", user.login);
 
-router.get("/blog/create", user.isLogin, blog.showBlogCreate)
+router.get("/blog/create", user.isLogin, blog.showBlogCreate);
+
+router.post("/blog/create", user.isLogin, blog.blogCreate);
 
 // router.get("/:md", home.show);
 

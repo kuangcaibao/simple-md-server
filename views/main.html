@@ -1,1 +1,33 @@
-<div>This is the main area</div>
+<%
+  if(docs.length == 0) {
+%>
+  <div class="alert alert-success" role="alert">现在还没有干货，敬请期待！！！</div>
+<%
+  }
+%>
+
+
+<%
+  for(var i = 0; i < docs.length; i++) {
+    var doc = docs[i];
+%>
+
+    <div class="blog-section">
+      <a href="/<%= doc['_id']%>" class="blog-title"><%= doc["title"]%></a>
+      <p class="blog-abstract"><%= doc["abstract"]%></p>
+      <div>
+        <%
+          for(var k = 0; k < doc["labels"].length; k++) {
+            var label = doc["labels"][k];
+        %>
+            <a href="/label/<%= label%>" class="label label-success blog-label"><%= label%></a>
+        <%
+          }
+        %>
+            <span><%= doc["publishTime"].toLocaleDateString()%></span>
+      </div>
+    </div>
+
+<%
+  }
+%>
