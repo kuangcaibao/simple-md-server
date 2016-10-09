@@ -20,20 +20,21 @@
 
 <div class="sidebar-module">
   
-  <h4>归档</h4>
-
-</div>
-
-<div class="sidebar-module">
-  
   <h4>联系</h4>
 
   <ol class="list-unstyled">
     
+  <%
+    config.connectme.map(function(cc, index) {
+  %>
+
     <li>
-      <a href="http://github.com/kuangcaibao">Github</a>
+      <a href="<%= cc.url %>"><%= cc.title%></a>
     </li>
 
+  <%  
+    })
+  %>
   </ol>
 
 </div>

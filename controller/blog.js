@@ -21,7 +21,7 @@ exports.blogCreate = function(req, res) {
     labels: blogLabel, 
     publishTime: new Date(), 
     abstract: blogAbstract,
-    mdFile: blogMdFile
+    filePath: blogMdFile
   }).then(function() {
     res.json({ErrorCode: 0, Info: "发布成功"});
   }).catch(function() {

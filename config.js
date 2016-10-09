@@ -21,5 +21,11 @@ module.exports = {
     ip: "127.0.0.1",
     port: 27017,
     db: "blog"
-  }
+  },
+
+  // 联系列表
+  connectme: [{
+    title: "Github",
+    url: "http://github.com/kuangcaibao"
+  }]
 }
