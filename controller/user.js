@@ -5,16 +5,16 @@ var { blogFind } = require("../proxy/blog");
 exports.showHome = function(req, res) {
 
   blogFind({}).then(function(docs) {
-    res.render("home", { docs: docs });
+    res.render("home/home", { docs: docs });
   }).catch(function(err) {
-    res.render("home", { docs: []});
+    res.render("home/home", { docs: []});
   })
 }
 
 
 // 显示登录界面
 exports.showLogin = function(req, res) {
-  res.render("login");
+  res.render("user/login");
 }
 
 // 处理登录请求
@@ -31,7 +31,7 @@ exports.login = function(req, res) {
     res.redirect("/");
   } else {
 
-    res.render("login", {msg: "用户名或者密码错误！"});
+    res.render("user/login", {msg: "用户名或者密码错误！"});
   }
 
 }

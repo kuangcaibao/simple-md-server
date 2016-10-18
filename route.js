@@ -15,6 +15,8 @@ router.get("/blog/create", user.isLogin, blog.showBlogCreate);
 
 router.post("/blog/create", user.isLogin, blog.blogCreate);
 
-// router.get("/:md", home.show);
+router.get("/:blogId", blog.blogShowDetail);
+
+router.post("/api/blog/:blogFileName", blog.blogSendMdFile);
 
 module.exports = router;

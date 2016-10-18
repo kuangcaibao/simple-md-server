@@ -1,5 +1,7 @@
+var path = require("path");
 var {
-  blogSave
+  blogSave,
+  blogFindById
 } = require("../proxy/blog");
 
 // 显示创建Blog界面
@@ -27,4 +29,21 @@ exports.blogCreate = function(req, res) {
   }).catch(function() {
     res.json({ErrorCode: -1, Info: "发布失败"});
   })
+}
+
+// 显示Blog文章详情
+exports.blogShowDetail = function(req, res, next) {
+
+  var blogId = req.params.blogId;
+  blogFindById(blogId).then(function(doc) {
+    res.render("blog/detail", {doc: doc});
+  }).catch(function(err) {
+    res.render("blog/detail");
+  })
+}
+
+// 根据md文件地址返回对应的md文件内容
+exports.blogSendMdFile = function(req, res) {
+  // console.log(__dirname);
+  res.sendFile(path.resolve(__dirname, "../doc/index.md"));
 }
