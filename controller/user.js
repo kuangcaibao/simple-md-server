@@ -1,16 +1,4 @@
 var config = require("../config");
-var { blogFind } = require("../proxy/blog");
-
-// 显示首页
-exports.showHome = function(req, res) {
-
-  blogFind({}).then(function(docs) {
-    res.render("home/home", { docs: docs });
-  }).catch(function(err) {
-    res.render("home/home", { docs: []});
-  })
-}
-
 
 // 显示登录界面
 exports.showLogin = function(req, res) {

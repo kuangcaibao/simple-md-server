@@ -1,8 +1,19 @@
 var path = require("path");
 var {
   blogSave,
-  blogFindById
+  blogFindById,
+  blogFind
 } = require("../proxy/blog");
+
+// 显示首页
+exports.showHome = function(req, res) {
+
+  blogFind({}).then(function(docs) {
+    res.render("home/home", { docs: docs });
+  }).catch(function(err) {
+    res.render("home/home", { docs: []});
+  })
+}
 
 // 显示创建Blog界面
 exports.showBlogCreate = function(req, res) {

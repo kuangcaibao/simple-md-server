@@ -10,7 +10,7 @@ exports.blogSave = function(blogToSave, callback) {
 // serach
 exports.blogFind = function(queryParam, callback) {
   
-  return Blog.find(queryParam, callback);
+  return Blog.find(queryParam, callback).sort({"publishTime": -1});
 
 }
 
