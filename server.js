@@ -52,10 +52,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use("/", router);
 
-// app.get("*", function(req, res) {
+app.get("*", function(req, res) {
 
-//   res.redirect("/");
-// })
+  res.render("_404");
+})
 
 app.listen(config.listen_port, function() {
   console.log("app listen at port: " + config.listen_port);
