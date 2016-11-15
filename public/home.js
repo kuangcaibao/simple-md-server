@@ -5,7 +5,7 @@ $(function() {
 
   pageQuery();
 
-  $("#prevPage").click = function() {
+  $("#prevPage").on("click", function() {
 
     if(curPage == 0) {
       alert("已到首页");
@@ -17,15 +17,15 @@ $(function() {
     }
 
     return false;
-  }
+  });
 
-  $("#nextPage").click = function() {
+  $("#nextPage").on("click", function() {
 
     curPage ++;
     pageQuery();
 
     return false;
-  }
+  });
 
 });
 
