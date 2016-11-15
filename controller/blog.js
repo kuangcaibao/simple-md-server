@@ -2,18 +2,35 @@ var path = require("path");
 var {
   blogSave,
   blogFindById,
-  blogFind
+  blogFind,
+  blogPageQuery
 } = require("../proxy/blog");
 
 // 显示首页
 exports.showHome = function(req, res) {
 
-  blogFind({}).then(function(docs) {
-    res.render("home/home", { docs: docs });
+  res.render("home/home");
+
+  // blogFind({}).then(function(docs) {
+  //   res.render("home/home", { docs: docs });
+  // }).catch(function(err) {
+  //   res.render("home/home", { docs: []});
+  // })
+}
+
+
+exports.queryBlogListPage = function(req, res) {
+
+  var curPage = req.body.curPage;
+  var pageSize = req.body.pageSize;
+
+  blogPageQuery({"curPage": curPage, "pageSize": pageSize}).then(function(blogs) {
+    res.json({ErrorCode: 0, blogs: blogs});
   }).catch(function(err) {
-    res.render("home/home", { docs: []});
+    res.json({ErrorCode: -1, ErrorInfo: err.toString()});
   })
 }
+
 
 // 显示创建Blog界面
 exports.showBlogCreate = function(req, res) {

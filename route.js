@@ -18,4 +18,6 @@ router.get("/:blogId", blog.blogShowDetail);
 
 router.post("/api/blog/:blogFileName", blog.blogSendMdFile);
 
+router.post("/api/blogPageQuery", blog.queryBlogListPage);
+
 module.exports = router;

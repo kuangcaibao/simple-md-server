@@ -1,33 +1,42 @@
-<%
-  if(docs.length == 0) {
-%>
-  <div class="alert alert-success" role="alert">现在还没有干货，敬请期待！！！</div>
-<%
-  }
-%>
+<div id="blogList"></div>
+<nav>
+  <ul class="pager">
+    <li><a href="#" id="prevPage">上一页</a></li>
+    <li><a href="#" id="nextPage">下一页</a></li>
+  </ul>
+</nav>
+<script type="text/x-dot-template" id="blogTpl">
 
+{{~it:item:index}}
 
-<%
-  for(var i = 0; i < docs.length; i++) {
-    var doc = docs[i];
-%>
+  <div class="blog-section">
+    <a href="/{{= item._id}}" class="blog-title">{{= item.title}}</a>
+    <p class="blog-abstract">{{= item.abstract}}</p>
+    <div>
 
-    <div class="blog-section">
-      <a href="/<%= doc['_id']%>" class="blog-title"><%= doc["title"]%></a>
-      <p class="blog-abstract"><%= doc["abstract"]%></p>
-      <div>
-        <%
-          for(var k = 0; k < doc["labels"].length; k++) {
-            var label = doc["labels"][k];
-        %>
-            ·<a href="/label/<%= label%>"><%= label%></a>
-        <%
-          }
-        %>
-            <span><%= doc["publishTime"].toLocaleDateString()%></span>
-      </div>
+      {{~item.labels:label:k}}
+
+        .<a href="/label/{{=label}}">{{=label}}</a>
+
+      {{~}}
+
+      <span>{{= item.publishTime.substr(0, 10)}} {{= item.publishTime.substr(11, 8)}}</span>
+
     </div>
 
-<%
-  }
-%>
+  </div>  
+
+{{~}}
+
+</script>
+
+<script type="text/x-dot-template" id="noDataTpl">
+  <div class="alert alert-success" role="alert">现在还没有干货，敬请期待！！！</div>
+</script>
+
+<script type="text/template">
+  <span>{{= item.publishTime.toLocaleDateString()}} {{= item.publishTime.toTimeString().substr(0,8)}}</span>
+</script>
+
+<script type="text/javascript" src="/public/doT.min.js"></script>
+<script type="text/javascript" src="/public/home.js"></script>
