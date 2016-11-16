@@ -34,30 +34,37 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="/public/marked.js"></script>
-<script type="text/javascript">
-  
-$(function() {
-  $.ajax({
-    url: "/api<%= doc['filePath']%>",
-    type: "POST"
-  }).done(function(data) {
 
-    $("#mdHtml").html(marked(data));
+<%
+if(typeof doc != "undefined") {
+%>
+  <script type="text/javascript" src="/public/marked.js"></script>
+  <script type="text/javascript">
+    
+  $(function() {
+    $.ajax({
+      url: "/api<%= doc['filePath']%>",
+      type: "POST"
+    }).done(function(data) {
 
-    $("#mdContent").html("");
-    var h3s = $("#mdHtml").find("h3");
-    h3s.map(function(index, o) {
-      if(index == 0) {
-        $("#mdContent").append("<li class='active'><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
-      } else {
-        $("#mdContent").append("<li><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
-      }
+      $("#mdHtml").html(marked(data));
+
+      $("#mdContent").html("");
+      var h3s = $("#mdHtml").find("h3");
+      h3s.map(function(index, o) {
+        if(index == 0) {
+          $("#mdContent").append("<li class='active'><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
+        } else {
+          $("#mdContent").append("<li><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
+        }
+      })
+
+    }).fail(function(err) {
+      alert(err.responseText);
     })
-
-  }).fail(function(err) {
-    alert(err.responseText);
   })
-})
 
-</script>
+  </script>
+<%
+}
+%>

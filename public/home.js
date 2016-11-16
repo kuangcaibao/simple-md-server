@@ -1,57 +1,39 @@
-var curPage = 0;
-var pageSize = 10;
+var blogPage = new BlogPage();
 
 $(function() {
 
-  pageQuery();
+  var ajaxSettings = {
+    url: "/api/blogPageQuery",
+    type: "POST",
+    dataType: "JSON"
+  };
 
   $("#prevPage").on("click", function() {
-
-    if(curPage == 0) {
-      alert("已到首页");
-    }
-
-    if(curPage != 0) {
-      curPage --;
-      pageQuery();
-    }
-
+    blogPage.prevPage(ajaxSettings).done(function(data) {
+      if(data.ErrorCode == 0) {
+        showHtml(data.blogs);
+      } else {
+        alert(data.ErrorInfo);
+      }
+    });
     return false;
   });
 
   $("#nextPage").on("click", function() {
-
-    curPage ++;
-    pageQuery();
-
+    blogPage.nextPage(ajaxSettings).done(function(data) {
+      if(data.ErrorCode == 0) {
+        showHtml(data.blogs);
+      } else {
+        alert(data.ErrorInfo);
+      }
+    });
     return false;
   });
 
+
+  $("#nextPage").click();
+
 });
-
-function pageQuery() {
-
-  $.ajax({
-    url: "/api/blogPageQuery",
-    type: "POST",
-    dataType: "JSON",
-    data: {
-      curPage: curPage,
-      pageSize: pageSize
-    }
-  }).done(function(data) {
-
-    if(data.ErrorCode == 0) {
-      showHtml(data.blogs);
-    } else {
-      alert(data.ErrorInfo);
-    }
-
-  }).fail(function(err) {
-    alert(err.responseText);
-  })
-
-}
 
 function showHtml(blogs) {
   if(blogs.length == 0) {
