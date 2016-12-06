@@ -33,6 +33,21 @@ $(function() {
 
   $("#nextPage").click();
 
+  // 获取label标签
+  $.ajax({
+    url: "/api/labelQuery",
+    type: "POST",
+    dataType: "JSON"
+  }).done(function(data) {
+    if(data.ErrorCode == 0) {
+      var tplText = $("#labelListTpl")[0].text;
+      var tplFunc = doT.template(tplText);
+      $("#labelList").html(tplFunc(data.lables));
+    } else {
+      console.error(data.ErrorInfo);
+    }
+  })
+
 });
 
 function showHtml(blogs) {

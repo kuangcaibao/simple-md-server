@@ -60,6 +60,7 @@ if(typeof doc != "undefined") {
       })
 
     }).fail(function(err) {
+      console.error(err);
       alert(err.responseText);
     })
   })
