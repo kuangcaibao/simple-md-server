@@ -2,10 +2,14 @@ var blogPage = new BlogPage();
 
 $(function() {
 
+  var pathName = window.location.pathname;
+  var labelName = pathName.substr(pathName.lastIndexOf("\/") + 1);
+
   var ajaxSettings = {
-    url: "/api/blogPageQuery",
+    url: "/api/blogPageQueryByLabel",
     type: "POST",
-    dataType: "JSON"
+    dataType: "JSON",
+    data: { labelName: labelName }
   };
 
   $("#prevPage").on("click", function() {

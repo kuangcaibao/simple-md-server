@@ -1,5 +1,5 @@
 var {
-  labelFindAll
+  labelFindAll,
 } = require("../proxy/label");
 
 exports.findAll = function(req, res) {
@@ -8,4 +8,8 @@ exports.findAll = function(req, res) {
   }).catch(function(e) {
     res.json({ErrorCode: -1, ErrorInfo: e.toString()});
   })
+}
+
+exports.findBlogsByLabel = function(req, res) {
+  
 }

@@ -7,6 +7,7 @@ exports.blogSave = function(blogToSave) {
   return blog.save(); 
 }
 
+// 分页查询blog
 exports.blogPageQuery = function(q) {
 
   var pageSize = q.pageSize;
@@ -15,6 +16,14 @@ exports.blogPageQuery = function(q) {
   return Blog.find().sort({"publishTime": -1}).skip(skipNum).limit(pageSize);
 }
 
+// 根据label名称，分页查询blog
+exports.blogPageQueryByLabel = function(q) {
+  var pageSize = q.pageSize;
+  var skipNum = q.curPage * q.pageSize;
+  var labelName = q.labelName;
+
+  return Blog.find({labels: {$all: [labelName]}}).sort({"publishTime": -1}).skip(skipNum).limit(pageSize);
+}
 
 // serach
 exports.blogFind = function(q) {

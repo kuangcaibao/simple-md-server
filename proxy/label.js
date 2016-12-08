@@ -1,4 +1,5 @@
 var Label = require("../model/label");
+var Q = require("q");
 
 // 查询所有的标签
 exports.labelFindAll = function() {
@@ -12,10 +13,12 @@ exports.labelFindByName = function(labelName) {
   return Label.find({label: labelName});
 }
 
-exports.labelSave = function(labelName) {
+// 存储labels列表
+exports.labelsSave = function(labels) {
 
-  var label = new Label();
-  Object.assign(label, { label: labelName });
-
-  return label.save();
+  return Q.all(labels.map(function(name) {
+    var label = new Label();
+    Object.assign(label, {label: name});
+    return label.save();
+  }))
 }

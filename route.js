@@ -23,4 +23,8 @@ router.post("/api/blogPageQuery", blog.queryBlogListPage);
 
 router.post("/api/labelQuery", label.findAll);
 
+router.get("/label/:label", blog.showBlogByLabel);
+
+router.post("/api/blogPageQueryByLabel", blog.queryBlogListPageByLabel);
+
 module.exports = router;

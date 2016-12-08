@@ -1,10 +1,17 @@
 var path = require("path");
+var Q = require("q");
+
 var {
   blogSave,
   blogFindById,
   blogFind,
-  blogPageQuery
+  blogPageQuery,
+  blogPageQueryByLabel
 } = require("../proxy/blog");
+
+var {
+  labelsSave
+} = require("../proxy/label");
 
 // 显示首页
 exports.showHome = function(req, res) {
@@ -18,7 +25,7 @@ exports.showHome = function(req, res) {
   // })
 }
 
-
+// blog分页查询
 exports.queryBlogListPage = function(req, res) {
 
   var curPage = req.body.curPage;
@@ -31,6 +38,22 @@ exports.queryBlogListPage = function(req, res) {
   })
 }
 
+exports.showBlogByLabel = function(req, res) {
+  res.render("label/label");
+}
+
+// blog 分页查询，使用label区分
+exports.queryBlogListPageByLabel = function(req, res) {
+  var curPage = req.body.curPage;
+  var pageSize = req.body.pageSzie;
+  var labelName = req.body.labelName;
+
+  blogPageQueryByLabel({"curPage": curPage, "pageSize": pageSize, "labelName": labelName}).then(function(blogs) {
+    res.json({ErrorCode: 0, blogs: blogs});
+  }).catch(function(err) {
+    res.json({ErrorCode: -1, ErrorInfo: err.toString()});
+  })
+}
 
 // 显示创建Blog界面
 exports.showBlogCreate = function(req, res) {
@@ -46,17 +69,30 @@ exports.blogCreate = function(req, res) {
   var blogMdFile = req.body.blogMdFile;
 
   // res.send("EOF");
-  blogSave({
+
+  labelsSave(blogLabel).then(blogSave({
     title: blogTitle, 
     labels: blogLabel, 
     publishTime: new Date(), 
     abstract: blogAbstract,
     filePath: blogMdFile
-  }).then(function() {
+  })).then(function() {
     res.json({ErrorCode: 0, Info: "发布成功"});
   }).catch(function() {
     res.json({ErrorCode: -1, Info: "发布失败"});
-  })
+  });
+
+  // blogSave({
+  //   title: blogTitle, 
+  //   labels: blogLabel, 
+  //   publishTime: new Date(), 
+  //   abstract: blogAbstract,
+  //   filePath: blogMdFile
+  // }).then(function() {
+  //   res.json({ErrorCode: 0, Info: "发布成功"});
+  // }).catch(function() {
+  //   res.json({ErrorCode: -1, Info: "发布失败"});
+  // })
 }
 
 // 显示Blog文章详情

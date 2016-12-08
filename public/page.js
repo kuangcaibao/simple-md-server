@@ -19,7 +19,7 @@ BlogPage.prototype.prevPage = function(ajaxSettings) {
     _that.isFirstPage = true;
   }
 
-  Object.assign(ajaxSettings, { data: {curPage: _that.page, pageSize: _that.pageSize}});
+  Object.assign(ajaxSettings.data, {curPage: _that.page, pageSize: _that.pageSize});
 
   return $.ajax(ajaxSettings).done(function(data) {
     
@@ -50,7 +50,7 @@ BlogPage.prototype.nextPage = function(ajaxSettings) {
     _that.isFirstPage = false;
   }
 
-  Object.assign(ajaxSettings, { data: {curPage: _that.page, pageSize: _that.pageSize}});
+  Object.assign(ajaxSettings.data, {curPage: _that.page, pageSize: _that.pageSize});
 
   return $.ajax(ajaxSettings).done(function(data) {
     if(data.ErrorCode == 0) {
