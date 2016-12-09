@@ -5,7 +5,8 @@ $(function() {
   var ajaxSettings = {
     url: "/api/blogPageQuery",
     type: "POST",
-    dataType: "JSON"
+    dataType: "JSON",
+    data: {}
   };
 
   $("#prevPage").on("click", function() {

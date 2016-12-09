@@ -1,10 +1,11 @@
 <div class="container">
   
   <div class="row">
-    <div class="col-sm-8">
-      <%
-        if(typeof doc != "undefined") {
-      %>
+
+    <% if(typeof doc != "undefined") { %>
+      
+      <div class="col-sm-12 articleTitle">
+
           <h2><%= doc["title"]%></h2>
           <div>
                 <span><%= doc["publishTime"].toLocaleDateString()%></span>
@@ -17,28 +18,30 @@
               }
             %>
           </div>
+      </div>
 
-          <div id="mdHtml"></div>
-      <%  
-        } else {
-      %>
-          <div class="alert alert-danger" role="alert">哈哈，文章不见了！！！</div>
-      <%
-        }
-      %>
-    </div>
-    <div class="col-sm-3 col-sm-offset-1" id="myScrollSpy">
-      <ul class="nav nav-tabs nav-stacked" data-spy="affix" id="mdContent">
-        
-      </ul>
-    </div>
+      <div class="col-sm-8">
+        <div id="mdHtml" class="mdContentArea"></div>        
+      </div>
+
+      <div class="col-sm-3 col-sm-offset-1" id="myScrollSpy">
+        <ul class="nav nav-tabs nav-stacked" data-spy="affix" id="mdContent">
+          
+        </ul>
+      </div>
+
+    <% } else { %>
+
+        <div class="alert alert-danger" role="alert">哈哈，文章不见了！！！</div>
+
+    <% } %>
+
   </div>
 </div>
 
-<%
-if(typeof doc != "undefined") {
-%>
+<% if(typeof doc != "undefined") { %>
   <script type="text/javascript" src="/public/marked.js"></script>
+  <script type="text/javascript" src="/public/mdtable.js"></script>
   <script type="text/javascript">
     
   $(function() {
@@ -48,24 +51,15 @@ if(typeof doc != "undefined") {
     }).done(function(data) {
 
       $("#mdHtml").html(marked(data));
-
-      $("#mdContent").html("");
-      var h3s = $("#mdHtml").find("h3");
-      h3s.map(function(index, o) {
-        if(index == 0) {
-          $("#mdContent").append("<li class='active'><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
-        } else {
-          $("#mdContent").append("<li><a href='#"+o.id+"'>"+$(o).text()+"</a></li>");
-        }
-      })
+      mdTable("mdContent", $("#mdHtml").find("h1,h2,h3,h4,h5,h6"));
 
     }).fail(function(err) {
       console.error(err);
-      alert(err.responseText);
+      // alert(err.responseText);
+      // 这里直接显示没有文件内容
+      $("#mdHtml").parent().html("<div class='alert alert-success' role='alert'>Oops，文件不见了！！！</div>");
     })
   })
 
   </script>
-<%
-}
-%>
+<% } %>

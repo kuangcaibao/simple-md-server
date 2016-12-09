@@ -31,3 +31,8 @@ body {
 .blog-label {
   font-size: 10px;
 }
+
+.articleTitle {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd; 
+}
