@@ -27,5 +27,8 @@ module.exports = {
   connectme: [{
     title: "Github",
     url: "http://github.com/kuangcaibao"
-  }]
+  }],
+
+  // blog文件存放根目录
+  blogRootDir: "blog"
 }

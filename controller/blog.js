@@ -107,8 +107,9 @@ exports.blogShowDetail = function(req, res, next) {
 }
 
 // 根据md文件地址返回对应的md文件内容
+var { blogRootDir } = require("../config");
 exports.blogSendMdFile = function(req, res) {
   // console.log(__dirname);
   // console.log(req.params.blogFileName);
-  res.sendFile(path.resolve(__dirname, "../doc/" + req.params.blogFileName));
+  res.sendFile(path.resolve(__dirname, "../" + blogRootDir + "/" + req.params.blogFileName));
 }

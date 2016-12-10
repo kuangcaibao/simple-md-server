@@ -1,5 +1,4 @@
 var express = require("express");
-var marked = require("marked");
 var fs = require("fs");
 var path = require("path");
 var _ = require("lodash");
@@ -8,24 +7,11 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 
-// 路由
-var router = require("./route");
-
 var app = new express();
 var config = require("./config");
+var { blogRootDir } = config;
 
-marked.setOptions(Object.assign({
-  render: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false
-}, config.marked));
-
-app.use("/imgs", express.static("doc/imgs"));
+app.use("/imgs", express.static(blogRootDir + "/imgs"));
 app.use("/public", express.static("public"));
 
 app.get("/favicon.ico", function(req, res) {
@@ -39,9 +25,9 @@ app.engine("html", ejsMate);
 app.locals._layoutFile = "layout.html";
 _.extend(app.locals, {
   config: config,
-  // Loader: Loader
 });
 
+// session，reqeuest参数处理
 app.use(session(config.session));
 app.use(function(req, res, next) {
   res.locals = req.session;
@@ -50,12 +36,12 @@ app.use(function(req, res, next) {
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 
+// 路由处理
+var router = require("./route");
 app.use("/", router);
-
 app.get("*", function(req, res) {
-
   res.render("_404");
-})
+});
 
 app.listen(config.listen_port, function() {
   console.log("app listen at port: " + config.listen_port);
