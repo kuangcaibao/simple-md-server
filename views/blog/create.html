@@ -43,11 +43,21 @@
         <h4>Tips:</h4>
         <p></p>
       </div>
+      <div class="sidebar-module">
+        <h4>标签</h4>
+        <div id="labelList"></div>
+      </div>
     </div>
   </div>
 
 </div>
+<script type="text/template" id="labelListTpl">
+  {{~it:item:index}}
+    <a href="/label/{{=item.label}}" class="label label-success">{{=item.label}}</a>
+  {{~}}
+</script>
 
+<script type="text/javascript" src="/public/doT.min.js"></script>
 <script type="text/javascript">
   
 function blogSubmit() {
@@ -79,5 +89,22 @@ function blogSubmit() {
 
   return false;
 }
+
+$(function() {
+  // 获取label标签
+  $.ajax({
+    url: "/api/labelQuery",
+    type: "POST",
+    dataType: "JSON"
+  }).done(function(data) {
+    if(data.ErrorCode == 0) {
+      var tplText = $("#labelListTpl")[0].text;
+      var tplFunc = doT.template(tplText);
+      $("#labelList").html(tplFunc(data.labels));
+    } else {
+      console.error(data.ErrorInfo);
+    }
+  })
+})
 
 </script>

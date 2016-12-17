@@ -1,6 +1,6 @@
 var mdTable = function() {
 
-  var sufix = "$$tb";
+  var sufix = "__tb";
 
   var fmtTable = function(id, tbs) {
 

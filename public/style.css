@@ -14,6 +14,7 @@ body {
 
 .blog-section {
   padding-bottom: 15px;
+  padding-top: 15px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -30,6 +31,11 @@ body {
 
 .blog-label {
   font-size: 10px;
+}
+
+.label {
+  /*margin-top: 5px;*/
+  line-height: 30px;
 }
 
 .articleTitle {
