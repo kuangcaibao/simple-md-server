@@ -9,9 +9,9 @@ var cookieParser = require("cookie-parser");
 
 var app = new express();
 var config = require("./config");
-var { blogRootDir } = config;
+var { blogrootdir } = config;
 
-app.use("/imgs", express.static(blogRootDir + "/imgs"));
+app.use("/imgs", express.static(blogrootdir + "/imgs"));
 app.use("/public", express.static("public"));
 
 app.get("/favicon.ico", function(req, res) {
@@ -43,6 +43,6 @@ app.get("*", function(req, res) {
   res.render("_404");
 });
 
-app.listen(config.listen_port, function() {
-  console.log("app listen at port: " + config.listen_port);
+app.listen(config.listenport, function() {
+  console.log("app listen at port: " + config.listenport);
 });

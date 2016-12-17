@@ -1,6 +1,6 @@
 module.exports = {
 
-  listen_port: 10234,
+  listenport: 10234,
 
   // 管理用户配置
   admin: {
@@ -30,5 +30,5 @@ module.exports = {
   }],
 
   // blog文件存放根目录
-  blogRootDir: "blog"
+  blogrootdir: "doc"
 }
