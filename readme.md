@@ -18,10 +18,10 @@
 
 类似于一般的 `github` `node` 项目。
 
-  $ git clone github.com/kuangcaibao/simple-md-server.git
-  $ cd simple-md-server
-  $ npm install
-  $ npm start
+	$ git clone github.com/kuangcaibao/simple-md-server.git
+	$ cd simple-md-server
+	$ npm install
+	$ npm start
 
 前提您已安装了 `node` 和 `mongodb`。
 
@@ -29,40 +29,40 @@
 
 # 3. 数据模型
 
-  // blog
-  var blogSchema = mongoose.Schema({
-    title: String,
-    labels: Array,
-    publishTime: Date,
-    abstract: String,
-    filePath: String
-  });
+	// blog
+	var blogSchema = mongoose.Schema({
+		title: String,
+		labels: Array,
+		publishTime: Date,
+		abstract: String,
+		filePath: String
+	});
 
-  // label
-  var labelSchema = mongoose.Schema({
-    label: String
-  });
+	// label
+	var labelSchema = mongoose.Schema({
+		label: String
+	});
 
 # 4. 路由
 
-  router.get("/", blog.showHome);
+	router.get("/", blog.showHome);
 
-  router.get("/login", user.showLogin);
+	router.get("/login", user.showLogin);
 
-  router.post("/login", user.login);
+	router.post("/login", user.login);
 
-  router.get("/blog/create", user.isLogin, blog.showBlogCreate);
+	router.get("/blog/create", user.isLogin, blog.showBlogCreate);
 
-  router.post("/blog/create", user.isLogin, blog.blogCreate);
+	router.post("/blog/create", user.isLogin, blog.blogCreate);
 
-  router.get("/:blogId", blog.blogShowDetail);
+	router.get("/:blogId", blog.blogShowDetail);
 
-  router.post("/api/blog/:blogFileName", blog.blogSendMdFile);
+	router.post("/api/blog/:blogFileName", blog.blogSendMdFile);
 
-  router.post("/api/blogPageQuery", blog.queryBlogListPage);
+	router.post("/api/blogPageQuery", blog.queryBlogListPage);
 
-  router.post("/api/labelQuery", label.findAll);
+	router.post("/api/labelQuery", label.findAll);
 
-  router.get("/label/:label", blog.showBlogByLabel);
+	router.get("/label/:label", blog.showBlogByLabel);
 
-  router.post("/api/blogPageQueryByLabel", blog.queryBlogListPageByLabel);
+	router.post("/api/blogPageQueryByLabel", blog.queryBlogListPageByLabel);
